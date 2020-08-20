@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SimpleButtonToggle : MonoBehaviour
+public class SimpleRestTest : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    [SerializeField] Text player_name_text;
+
     void Start()
     {
         

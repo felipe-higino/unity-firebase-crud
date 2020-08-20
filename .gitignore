@@ -1,5 +1,6 @@
 # # # project ignores
 basic-firebase-crud/Assets/api_config/
+basic-firebase-crud/Assets/RestClient/
 # # # auto-generated
 [Ll]ibrary/
 [Tt]emp/
@@ -58,3 +59,4 @@ sysinfo.txt
 crashlytics-build.properties
 
 basic-firebase-crud/Assets/api_config.meta
+basic-firebase-crud/Assets/RestClient.meta
