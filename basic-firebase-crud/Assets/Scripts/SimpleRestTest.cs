@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,9 +34,14 @@ public class SimpleRestTest : MonoBehaviour
     }
     #endregion
 
-    public void POST_IN_FIREBASE(PlayerData data)
+    [SerializeField] TextAsset URL;
+
+    public void POST_IN_FIREBASE(PlayerData data, Action confirmationCallback)
     {
-        RestClient.Post("https://unity-crud-test-fb.firebaseio.com/.json", data);
+        RestClient.Post($"{URL.text}{data.Name}.json", data)
+        .Then(response => {
+            confirmationCallback();
+        });
     }
 
 }

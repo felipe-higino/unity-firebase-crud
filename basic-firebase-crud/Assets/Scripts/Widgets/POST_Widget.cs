@@ -8,15 +8,26 @@ public class POST_Widget : MonoBehaviour
     [SerializeField] Text PlayerName;
     [SerializeField] Text TextConfirmation;
 
+    private void Awake()
+    {
+        TextConfirmation.text = "";
+    }
+
     public void OnSubmitPOST()
     {
         var playerName = PlayerName.text;
         if (playerName == "")
+        {
+            TextConfirmation.text = "Invalid name";
             return;
+        }
 
         var data = new PlayerData(playerName);
-        SimpleRestTest.Instance.POST_IN_FIREBASE(data);
+        SimpleRestTest.Instance.POST_IN_FIREBASE(data,()=>
+        {
+            TextConfirmation.text = $"Player \"{playerName}\" created!";
+        });
 
-        TextConfirmation.text = $"Player \"{playerName}\" created!";
     }
+
 }
