@@ -13,4 +13,20 @@ public class PUT_Widget : MonoBehaviour
     {
         TextConfirmation.text = "";
     }
+
+    public void OnSubmitEDIT()
+    {
+        var playerName = PlayerNameToEdit.text;
+        if (playerName == "")
+        {
+            TextConfirmation.text = "Invalid name";
+            return;
+        }
+
+        var old = PlayerNameToEdit.text;
+        var new_ = NewNameOfPlayer.text;
+        SimpleRestTest.Instance.EDIT_PLAYER_FROM_FIREBASE(old, new_,()=> {
+            TextConfirmation.text = $"{old} changed to {new_}";
+        });
+    }
 }

@@ -12,4 +12,21 @@ public class DELETE_Widget : MonoBehaviour
     {
         TextConfirmation.text = "";
     }
+
+    public void OnSubmitDELETE()
+    {
+        var playerName = PlayerNameToDelete.text;
+        if (playerName == "")
+        {
+            TextConfirmation.text = "Invalid name";
+            return;
+        }
+
+        SimpleRestTest.Instance.DELETE_FROM_FIREBASE(PlayerNameToDelete.text,(deleteSucessfull)=> {
+            if (deleteSucessfull)
+                TextConfirmation.text = "Player sucessfull deleted";
+            else
+                TextConfirmation.text = "Fail to delete player - server error";
+        });
+    }
 }
