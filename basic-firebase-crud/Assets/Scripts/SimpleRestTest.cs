@@ -38,9 +38,19 @@ public class SimpleRestTest : MonoBehaviour
 
     public void POST_IN_FIREBASE(PlayerData data, Action confirmationCallback)
     {
-        RestClient.Post($"{URL.text}{data.Name}.json", data)
+        RestClient.Put($"{URL.text}{data.Name}.json", data)
         .Then(response => {
             confirmationCallback();
+        });
+    }
+
+    public void GET_FROM_FIREBASE(String playerName, Action<PlayerData> confirmationCallback)
+    {
+        RestClient.Get<PlayerData>($"{URL.text}{playerName}.json")
+        .Then(response=> {
+            confirmationCallback(response);
+        }).Catch(err=> {
+            confirmationCallback(null);
         });
     }
 
