@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DELETE_Widget : MonoBehaviour
+public class DELETE_Widget_REST : MonoBehaviour
 {
     [SerializeField] Text PlayerNameToDelete;
     [SerializeField] Text TextConfirmation;

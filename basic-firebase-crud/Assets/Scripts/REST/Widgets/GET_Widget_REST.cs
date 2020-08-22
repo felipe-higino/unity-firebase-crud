@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class POST_Widget : MonoBehaviour
+public class GET_Widget_REST : MonoBehaviour
 {
     [SerializeField] Text PlayerName;
     [SerializeField] Text TextConfirmation;
@@ -13,7 +13,7 @@ public class POST_Widget : MonoBehaviour
         TextConfirmation.text = "";
     }
 
-    public void OnSubmitPOST()
+    public void OnSubmitGET()
     {
         var playerName = PlayerName.text;
         if (playerName == "")
@@ -22,12 +22,11 @@ public class POST_Widget : MonoBehaviour
             return;
         }
 
-        var data = new PlayerData(playerName);
-        SimpleRestTest.Instance.POST_IN_FIREBASE(data,()=>
-        {
-            TextConfirmation.text = $"Player \"{playerName}\" created!";
+        SimpleRestTest.Instance.GET_FROM_FIREBASE(playerName, playerData =>{
+            if (playerData == null)
+                TextConfirmation.text = "Player not found";
+            else
+                TextConfirmation.text = $"User \"{playerData.Name}\" found, Creation: \"{playerData.CreationDate}\"";
         });
-
     }
-
 }

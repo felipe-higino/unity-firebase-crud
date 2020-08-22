@@ -6,19 +6,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-[Serializable]
-public class PlayerData
-{
-    public string Name;// { get; }
-    public string CreationDate;// { get; }
-
-    public PlayerData(string name)
-    {
-        Name = name;
-        CreationDate = DateTime.Now.ToString();
-    }
-}
-
 public class SimpleRestTest : MonoBehaviour
 {
     #region singleton
