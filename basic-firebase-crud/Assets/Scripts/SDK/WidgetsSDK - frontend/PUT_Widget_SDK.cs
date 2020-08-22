@@ -28,6 +28,18 @@ public class PUT_Widget_SDK : MonoBehaviour
         NewNameOfPlayer.text = ""; //--------- reset text
         TextConfirmation.text = "submitted...";
 
-        //RequestFromSDK.Instance
+        RequestFromSDK.Instance.UPDATE_PLAYER_NAME(oldName, newName, res => {
+            switch (res)
+            {
+                case RequestFromSDK.ResponseStatus.SUCCESS:
+                    TextConfirmation.text = $"Login: {oldName} NewName: {newName}";
+                    break;
+                case RequestFromSDK.ResponseStatus.ERROR:
+                    TextConfirmation.text = "Update failed";
+                    break;
+                default:
+                    break;
+            }
+        });
     }
 }

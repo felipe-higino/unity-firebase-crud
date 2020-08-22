@@ -82,14 +82,43 @@ public class RequestFromSDK : Singleton<RequestFromSDK>
         callback(status, player);
     }
 
-    //public async void UPDATE_PLAYER_NAME(string name, Action<ResponseStatus> callback)
-    //{
+    public async void UPDATE_PLAYER_NAME(string oldName, string newName, Action<ResponseStatus> callback)
+    {
+        ResponseStatus status = new ResponseStatus();
+        await database.Child("Players").Child(oldName).Child("Name").SetValueAsync(newName)
+        .ContinueWith(task=> {
+            if (task.IsFaulted)
+            {
+                Debug.LogError($"Something went wrong. Status:{task.Status}");
+                status = ResponseStatus.ERROR;
+            }
+            else if (task.IsCompleted)
+            {
+                Debug.Log($"Done right! Status:{task.Status}");
+                status = ResponseStatus.SUCCESS;
+            }
+        });
+        callback(status);
+    }
 
-    //}
-
-    //public async void DELETE()
-    //{
-
-    //}
+    public async void DELETE_ACCOUNT(string login, Action<ResponseStatus> callback)
+    {
+        ResponseStatus status = new ResponseStatus();
+        await database.Child("Players").Child(login).RemoveValueAsync()
+        .ContinueWith(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError($"Something went wrong. Status:{task.Status}");
+                status = ResponseStatus.ERROR;
+            }
+            else if (task.IsCompleted)
+            {
+                Debug.Log($"Done right! Status:{task.Status}");
+                status = ResponseStatus.SUCCESS;
+            }
+        });
+        callback(status);
+    }
 
 }
