@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GET_Widget_SDK : MonoBehaviour
 {
 
-    [SerializeField] Text PlayerName;
+    [SerializeField] InputField PlayerName;
     [SerializeField] Text TextConfirmation;
 
     private void Awake()
@@ -36,7 +36,7 @@ public class GET_Widget_SDK : MonoBehaviour
                         TextConfirmation.text = "Player not found";
                         break;
                     }
-                    TextConfirmation.text = $"Player \"{player.Name}\" found! Creation: {player.CreationDate}";
+                    TextConfirmation.text = $"Player \"{player.Name}\" found! Creation: {player.CreationDate} Score:{player.Score}";
                     break;
                 case RequestFromSDK.ResponseStatus.ERROR:
                     TextConfirmation.text = "Query error";

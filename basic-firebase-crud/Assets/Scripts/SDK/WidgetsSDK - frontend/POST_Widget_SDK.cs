@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class POST_Widget_SDK : MonoBehaviour
 {
-    [SerializeField] Text PlayerName;
+    [SerializeField] InputField PlayerName;
     [SerializeField] Text TextConfirmation;
 
     private void Awake()

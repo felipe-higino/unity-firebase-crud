@@ -1735,7 +1735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fce8590183faed488d0930fdca64ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerName: {fileID: 515106740}
+  PlayerName: {fileID: 911158803}
   TextConfirmation: {fileID: 2099298411}
 --- !u!1 &1078392182
 GameObject:
@@ -1904,7 +1904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad611b394a1b19a45814119544039762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNameToDelete: {fileID: 1349835229}
+  PlayerNameToDelete: {fileID: 1341784437}
   TextConfirmation: {fileID: 631827096}
 --- !u!1 &1130379609
 GameObject:
@@ -2444,8 +2444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62836182a1534aa4fb4e3fdfea293203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNameToEdit: {fileID: 1212047134}
-  NewNameOfPlayer: {fileID: 1322324965}
+  PlayerNameToEdit: {fileID: 1275280275}
+  NewNameOfPlayer: {fileID: 1737315583}
   TextConfirmation: {fileID: 2112287244}
 --- !u!1 &1322324963
 GameObject:
@@ -2907,7 +2907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f5f2ff45f605c43be3d940d148eea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerName: {fileID: 1078392184}
+  PlayerName: {fileID: 329852686}
   TextConfirmation: {fileID: 694728422}
 --- !u!1 &1475694691
 GameObject:

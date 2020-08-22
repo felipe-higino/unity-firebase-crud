@@ -24,6 +24,9 @@ public class RequestFromSDK : Singleton<RequestFromSDK>
         database = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
+    /// <summary>
+    /// Auxiliates Firebase's SDK response queries status and callbacks 
+    /// </summary>
     public enum ResponseStatus { SUCCESS, ERROR }
 
     /// <summary>
@@ -31,6 +34,7 @@ public class RequestFromSDK : Singleton<RequestFromSDK>
     /// </summary>
     public async void CREATE_PLAYER(PlayerData player, Action<ResponseStatus> callback)
     {
+        player.Score = 1;
         var json = JsonUtility.ToJson(player);
         //generation of unique ID
         //var playerId = database.Child("Players").Push().Key;
@@ -78,7 +82,7 @@ public class RequestFromSDK : Singleton<RequestFromSDK>
         callback(status, player);
     }
 
-    //public async void UPDATE()
+    //public async void UPDATE_PLAYER_NAME(string name, Action<ResponseStatus> callback)
     //{
 
     //}
