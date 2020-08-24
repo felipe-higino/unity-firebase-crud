@@ -34,7 +34,7 @@ public class RequestFromSDK : Singleton<RequestFromSDK>
     /// <summary>
     /// Creates new player in databaase
     /// </summary>
-    public async void CREATE_PLAYER(PlayerData player, Action<ResponseStatus> callback)
+    public async void CREATE_DATA(PlayerData player, Action<ResponseStatus> callback)
     {
         var userID = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser?.UserId;
         if (userID == null)
@@ -67,12 +67,19 @@ public class RequestFromSDK : Singleton<RequestFromSDK>
         callback(status);
     }
 
-    public async void GET_PLAYER_BY_NAME(string name, Action<ResponseStatus,PlayerData> callback)
+    public async void GET_PLAYER_DATA(Action<ResponseStatus,PlayerData> callback)
     {
+        var userID = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser?.UserId;
+        if (userID == null)
+        {
+            Debug.LogError("user not logged in");
+            return;
+        }
+
         ResponseStatus status = new ResponseStatus();
         PlayerData player = null;
         await FirebaseDatabase.DefaultInstance
-        .GetReference($"Players/{name}")
+        .GetReference($"{accounts}/{userID}")
         .GetValueAsync().ContinueWith(task => {
             if (task.IsFaulted)
             {
@@ -91,10 +98,17 @@ public class RequestFromSDK : Singleton<RequestFromSDK>
         callback(status, player);
     }
 
-    public async void UPDATE_PLAYER_NAME(string oldName, string newName, Action<ResponseStatus> callback)
+    public async void UPDATE_PLAYER_NAME(string newName, Action<ResponseStatus> callback)
     {
+        var userID = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser?.UserId;
+        if (userID == null)
+        {
+            Debug.LogError("user not logged in");
+            return;
+        }
+
         ResponseStatus status = new ResponseStatus();
-        await database.Child("Players").Child(oldName).Child("Name").SetValueAsync(newName)
+        await database.Child(accounts).Child(userID).Child("Name").SetValueAsync(newName)
         .ContinueWith(task=> {
             if (task.IsFaulted)
             {
@@ -110,10 +124,17 @@ public class RequestFromSDK : Singleton<RequestFromSDK>
         callback(status);
     }
 
-    public async void DELETE_ACCOUNT(string login, Action<ResponseStatus> callback)
+    public async void DELETE_CREATED_DATA(string dataPath, Action<ResponseStatus> callback)
     {
+        var userID = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser?.UserId;
+        if (userID == null)
+        {
+            Debug.LogError("user not logged in");
+            return;
+        }
+
         ResponseStatus status = new ResponseStatus();
-        await database.Child("Players").Child(login).RemoveValueAsync()
+        await database.Child(accounts).Child(dataPath).RemoveValueAsync()
         .ContinueWith(task =>
         {
             if (task.IsFaulted)

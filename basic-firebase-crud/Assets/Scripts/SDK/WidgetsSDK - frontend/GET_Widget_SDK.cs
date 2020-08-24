@@ -27,7 +27,7 @@ public class GET_Widget_SDK : MonoBehaviour
         PlayerName.text = ""; //-------- reset text
         TextConfirmation.text = "submitted...";
 
-        RequestFromSDK.Instance.GET_PLAYER_BY_NAME(name, (res, player)=> {
+        RequestFromSDK.Instance.GET_PLAYER_DATA((res, player)=> {
             switch (res)
             {
                 case RequestFromSDK.ResponseStatus.SUCCESS:

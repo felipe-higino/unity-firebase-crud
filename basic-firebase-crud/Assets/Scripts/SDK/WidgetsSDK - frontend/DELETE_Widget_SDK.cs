@@ -25,7 +25,7 @@ public class DELETE_Widget_SDK : MonoBehaviour
         loginToDelete.text = ""; //-------- reset text
         TextConfirmation.text = "submitted...";
 
-        RequestFromSDK.Instance.DELETE_ACCOUNT(name,res=> {
+        RequestFromSDK.Instance.DELETE_CREATED_DATA(name,res=> {
             switch (res)
             {
                 case RequestFromSDK.ResponseStatus.SUCCESS:

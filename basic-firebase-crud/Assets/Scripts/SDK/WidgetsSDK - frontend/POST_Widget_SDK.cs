@@ -27,7 +27,7 @@ public class POST_Widget_SDK : MonoBehaviour
 
         //creating object in database
         var player = new PlayerData(name);
-        RequestFromSDK.Instance.CREATE_PLAYER(player, res =>
+        RequestFromSDK.Instance.CREATE_DATA(player, res =>
         { 
             switch (res)
             {

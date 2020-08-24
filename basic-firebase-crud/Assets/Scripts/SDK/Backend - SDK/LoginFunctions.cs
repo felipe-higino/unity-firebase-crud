@@ -86,6 +86,7 @@ public class LoginFunctions : Singleton<LoginFunctions>
         var name = auth.CurrentUser?.Email;
         if (name == null)
             return;
+
         auth.SignOut();
         Debug.Log($"account with email {auth.CurrentUser.Email} logged out");
         callback(name);
