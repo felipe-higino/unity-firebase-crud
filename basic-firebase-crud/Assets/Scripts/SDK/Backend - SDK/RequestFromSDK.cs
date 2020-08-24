@@ -4,6 +4,7 @@ using Firebase.Unity.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -11,6 +12,7 @@ public class RequestFromSDK : Singleton<RequestFromSDK>
 {
     [SerializeField] TextAsset dbURL;
     DatabaseReference database;
+    const string accounts = "Accounts";
 
     private void Awake()
     {
@@ -34,13 +36,20 @@ public class RequestFromSDK : Singleton<RequestFromSDK>
     /// </summary>
     public async void CREATE_PLAYER(PlayerData player, Action<ResponseStatus> callback)
     {
+        var userID = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser?.UserId;
+        if (userID == null)
+        {
+            Debug.LogError("user not logged in");
+            return;
+        }
+
         player.Score = 1;
         var json = JsonUtility.ToJson(player);
         //generation of unique ID
         //var playerId = database.Child("Players").Push().Key;
         //setting player data
         ResponseStatus status = new ResponseStatus();
-        await database.Child("Players").Child(player.Name).SetRawJsonValueAsync(json)
+        await database.Child(accounts).Child(userID).SetRawJsonValueAsync(json)
         .ContinueWith( task => {
             if (task.IsFaulted)
             {
